@@ -6,17 +6,23 @@ var domStats = require('..');
 describe('dom-stats', function() {
 
   it('should return the stats for a url', function() {
-    domStats('google.com', function(error, stats) {
+    domStats('google.com', {}, function(error, stats) {
       assert.ok(isPresent(stats));
     });
   });
 
   it('should return the stats for an HTML stats', function() {
-    domStats(fixture('furtive.html'), function(error, stats) {
+    domStats(fixture('furtive.html'), {}, function(error, stats) {
       assert.ok(isPresent(stats));
-      assert.equal(stats.p, 24);
+      assert.equal(stats.p, 21);
       assert.equal(stats.li, 12);
-      assert.equal(video, 0);
+      assert.equal(stats.video, 0);
+    });
+  });
+
+  it('should skip zero counts if the option is passed', function() {
+    domStats(fixture('furtive.html'), { ignoreZeroCounts: true }, function(error, stats) {
+      assert.equal(stats.video, undefined);
     });
   });
 });

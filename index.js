@@ -5,14 +5,17 @@ var isUrl = require('is-url');
 var htmlTags = require('html-tags');
 var normalizeUrl = require('normalize-url');
 
-module.exports = function domStats(urlOrHtml, callback) {
+module.exports = function domStats(urlOrHtml, options, callback) {
   if (typeof urlOrHtml != 'string') {
     throw new TypeError('dom-stats expected a string');
   }
 
+  options = options || {};
+  callback = callback || function() {};
+
   var jsdomOptions = {
     done: function(error, window) {
-      var stats = analyzeDom(error, window);
+      var stats = analyzeDom(error, window, options);
       callback(error, stats);
     }
   }
@@ -26,10 +29,16 @@ module.exports = function domStats(urlOrHtml, callback) {
   jsdom.env(jsdomOptions);
 }
 
-function analyzeDom(error, window) {
+function analyzeDom(error, window, options) {
+  options = options || {};
   var stats = {};
 
   htmlTags.forEach(function(tag) {
+    var tagCount = window.document.getElementsByTagName(tag).length;
+    if (options.ignoreZeroCounts && tagCount == 0) {
+      return;
+    }
+
     stats[tag] = window.document.getElementsByTagName(tag).length
   });
 
