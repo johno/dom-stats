@@ -26,6 +26,10 @@ domStats('google.com', function(err, stats) {
 
 MIT
 
+## Thanks to the following
+
+* <https://github.com/tmpvar/jsdom>
+
 ## Contributing
 
 1. Fork it

@@ -14,16 +14,19 @@
     "type": "git",
     "url": "https://github.com/johnotander/dom-stats.git"
   },
-  "keywords": [
-
-  ],
+  "keywords": [],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/johnotander/dom-stats/issues"
   },
   "homepage": "https://github.com/johnotander/dom-stats",
-  "dependencies": {},
+  "dependencies": {
+    "is-url": "^1.2.0",
+    "jsdom": "^3.0.0",
+    "normalize-url": "^1.0.2"
+  },
   "devDependencies": {
+    "is-present": "0.0.1",
     "mocha": "*"
   }
 }
