@@ -1,4 +1,5 @@
 var isPresent = require('is-present');
+var fs = require('fs');
 var assert = require('assert');
 var domStats = require('..');
 
@@ -11,8 +12,15 @@ describe('dom-stats', function() {
   });
 
   it('should return the stats for an HTML stats', function() {
-    domStats('<body><img src="foo.jpg"></body>', function(error, stats) {
+    domStats(fixture('furtive.html'), function(error, stats) {
       assert.ok(isPresent(stats));
+      assert.equal(stats.p, 24);
+      assert.equal(stats.li, 12);
+      assert.equal(video, 0);
     });
   });
 });
+
+function fixture(name) {
+  return fs.readFileSync('test/fixtures/' + name, 'utf8').trim();
+}

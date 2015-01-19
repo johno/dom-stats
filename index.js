@@ -2,6 +2,7 @@
 
 var jsdom = require('jsdom');
 var isUrl = require('is-url');
+var htmlTags = require('html-tags');
 var normalizeUrl = require('normalize-url');
 
 module.exports = function domStats(urlOrHtml, callback) {
@@ -26,5 +27,11 @@ module.exports = function domStats(urlOrHtml, callback) {
 }
 
 function analyzeDom(error, window) {
-  return { dom: 'stats' };
+  var stats = {};
+
+  htmlTags.forEach(function(tag) {
+    stats[tag] = window.document.getElementsByTagName(tag).length
+  });
+
+  return stats;
 }
