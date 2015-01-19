@@ -22,6 +22,7 @@
   "homepage": "https://github.com/johnotander/dom-stats",
   "dependencies": {
     "html-tags": "^1.1.0",
+    "is-present": "0.0.1",
     "is-url": "^1.2.0",
     "jsdom": "^3.0.0",
     "normalize-url": "^1.0.2"

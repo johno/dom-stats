@@ -4,6 +4,7 @@ var jsdom = require('jsdom');
 var isUrl = require('is-url');
 var htmlTags = require('html-tags');
 var normalizeUrl = require('normalize-url');
+var isPresent = require('is-present');
 
 module.exports = function domStats(urlOrHtml, options, callback) {
   if (typeof urlOrHtml != 'string') {
@@ -31,20 +32,58 @@ module.exports = function domStats(urlOrHtml, options, callback) {
 
 function analyzeDom(error, window, options) {
   options = options || {};
+
   var stats = {
     totalTags: 0,
+    totalClasses: 0,
+    totalIds: 0,
+    averageClassCount: 0,
+    duplicateIds: [],
+    duplicateIdsCount: 0,
     tagCounts: {}
   };
 
+  var ids = {};
+  var classes = {};
+
   htmlTags.forEach(function(tag) {
-    var tagCount = window.document.getElementsByTagName(tag).length;
+    var tags = window.document.getElementsByTagName(tag);
+    var tagCount = tags.length;
+
     if (options.ignoreZeroCounts && tagCount == 0) {
       return;
     }
 
     stats.totalTags += tagCount;
-    stats.tagCounts[tag] = window.document.getElementsByTagName(tag).length
+    stats.tagCounts[tag] = tagCount;
+
+    [].slice.call(tags).forEach(function(tag) {
+      var classList = (tag.getAttribute('class') || '').split(/\s+/);
+      if (isPresent(classList)) {
+        stats.totalClasses += classList.length;
+      }
+
+      if (isPresent(tag.id)) {
+        if (ids[tag.id]) {
+          ids[tag.id]++;
+        } else {
+          ids[tag.id] = 1;
+        }
+      }
+    });
   });
+
+  Object.keys(ids).forEach(function(id) {
+    stats.totalIds += ids[id];
+    if (ids[id] > 1) {
+      stats.duplicateIds.push(id);
+      stats.duplicateIdsCount++;
+    }
+  });
+
+  if (stats.totalTags) {
+    stats.averageClassCount = stats.totalClasses/stats.totalTags;
+  }
 
   return stats;
 }

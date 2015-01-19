@@ -25,6 +25,21 @@ describe('dom-stats', function() {
       assert.equal(stats.tagCounts.video, undefined);
     });
   });
+
+  it('should return id statistics', function() {
+    domStats(fixture('furtive.html'), {}, function(error, stats) {
+      assert.deepEqual(stats.duplicateIds, ['grid']);
+      assert.equal(stats.duplicateIdsCount, 1);
+      assert.equal(stats.totalIds, 17);
+    });
+  });
+
+  it('should return class statistics', function() {
+    domStats(fixture('furtive.html'), {}, function(error, stats) {
+      assert.equal(stats.totalClasses, 415);
+      assert.equal(Math.round(stats.averageClassCount), 2);
+    });
+  });
 });
 
 function fixture(name) {
