@@ -11,7 +11,7 @@ describe('dom-stats', function() {
     });
   });
 
-  it('should return the stats for an HTML stats', function() {
+  it('should return the stats for an HTML string', function() {
     domStats(fixture('furtive.html'), {}, function(error, stats) {
       assert.ok(isPresent(stats));
       assert.equal(stats.tagCounts.p, 21);
