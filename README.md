@@ -18,7 +18,11 @@ npm install --save dom-stats
 var domStats = require('dom-stats');
 
 domStats('google.com', function(err, stats) {
-  console.log(stats); // => { p: 21, a: 36 , ... }
+  console.log(stats);
+  // {
+  //   totalTags: 75,
+  //   tagCounts: { a: 12, div: 36, p: 4 }
+  // }
 });
 ```
 

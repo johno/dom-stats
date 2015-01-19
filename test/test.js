@@ -14,15 +14,15 @@ describe('dom-stats', function() {
   it('should return the stats for an HTML stats', function() {
     domStats(fixture('furtive.html'), {}, function(error, stats) {
       assert.ok(isPresent(stats));
-      assert.equal(stats.p, 21);
-      assert.equal(stats.li, 12);
-      assert.equal(stats.video, 0);
+      assert.equal(stats.tagCounts.p, 21);
+      assert.equal(stats.tagCounts.li, 12);
+      assert.equal(stats.tagCounts.video, 0);
     });
   });
 
   it('should skip zero counts if the option is passed', function() {
     domStats(fixture('furtive.html'), { ignoreZeroCounts: true }, function(error, stats) {
-      assert.equal(stats.video, undefined);
+      assert.equal(stats.tagCounts.video, undefined);
     });
   });
 });

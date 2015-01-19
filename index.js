@@ -31,7 +31,10 @@ module.exports = function domStats(urlOrHtml, options, callback) {
 
 function analyzeDom(error, window, options) {
   options = options || {};
-  var stats = {};
+  var stats = {
+    totalTags: 0,
+    tagCounts: {}
+  };
 
   htmlTags.forEach(function(tag) {
     var tagCount = window.document.getElementsByTagName(tag).length;
@@ -39,7 +42,8 @@ function analyzeDom(error, window, options) {
       return;
     }
 
-    stats[tag] = window.document.getElementsByTagName(tag).length
+    stats.totalTags += tagCount;
+    stats.tagCounts[tag] = window.document.getElementsByTagName(tag).length
   });
 
   return stats;
