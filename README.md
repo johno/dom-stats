@@ -2,6 +2,8 @@
 
 [![Build Status](https://secure.travis-ci.org/johnotander/dom-stats.png?branch=master)](https://travis-ci.org/johnotander/dom-stats)
 
+_Currently under development_
+
 Parse and return statistics for an HTML page.
 
 ## Installation
@@ -12,8 +14,12 @@ npm install --save dom-stats
 
 ## Usage
 
-```bash
-// ...
+```javascript
+var domStats = require('dom-stats');
+
+domStats('google.com', function(err, stats) {
+  console.log(stats);
+});
 ```
 
 ## License
@@ -28,6 +34,4 @@ MIT
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
 
-Crafted with <3 by John Otander ([@4lpine](https://twitter.com/4lpine)).
-
-This package was initially generated with [yeoman](http://yeoman.io) and the [p generator](https://github.com/johnotander/generator-p.git).
+Crafted with <3 by [John Otander](http://johnotander.com) ([@4lpine](https://twitter.com/4lpine)).
