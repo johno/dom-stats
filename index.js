@@ -58,6 +58,7 @@ function analyzeDom(error, window, options) {
     stats.tagCounts[tag] = tagCount;
 
     [].slice.call(tags).forEach(function(tag) {
+      // Get class statistics
       var classList = (tag.getAttribute('class') || '').split(/\s+/);
       if (isPresent(classList)) {
         stats.totalClasses += classList.length;
@@ -73,6 +74,7 @@ function analyzeDom(error, window, options) {
     });
   });
 
+  // Create additional id statistics
   Object.keys(ids).forEach(function(id) {
     stats.totalIds += ids[id];
     if (ids[id] > 1) {
