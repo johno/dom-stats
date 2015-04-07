@@ -1,8 +1,4 @@
-# dom-stats
-
-[![Build Status](https://secure.travis-ci.org/johnotander/dom-stats.png?branch=master)](https://travis-ci.org/johnotander/dom-stats)
-
-_Currently under development_
+# dom-stats [![Build Status](https://secure.travis-ci.org/johnotander/dom-stats.png?branch=master)](https://travis-ci.org/johnotander/dom-stats)
 
 Parse and return statistics for an HTML page.
 
@@ -21,6 +17,11 @@ domStats('google.com', function(err, stats) {
   console.log(stats);
   // {
   //   totalTags: 75,
+  //   totalClasses: 145,
+  //   totalIds: 17,
+  //   averageClassCount: 1.933333,
+  //   duplicateIds: [],
+  //   duplicateIdsCount: 0,
   //   tagCounts: { a: 12, div: 36, p: 4 }
   // }
 });

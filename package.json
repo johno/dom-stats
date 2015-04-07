@@ -2,7 +2,7 @@
   "name": "dom-stats",
   "description": "Parse and return statistics for an HTML page.",
   "author": "John Otander",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "index.js",
   "directories": {
     "test": "test"
@@ -14,7 +14,12 @@
     "type": "git",
     "url": "https://github.com/johnotander/dom-stats.git"
   },
-  "keywords": [],
+  "keywords": [
+    "dom",
+    "stats",
+    "statistics",
+    "html"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/johnotander/dom-stats/issues"
