@@ -31,9 +31,11 @@ domStats('<span id="foo"><i class="hi" id="foo"</i></span>', function(err, stats
 
 MIT
 
-## Thanks to the following
+## Related
 
-* <https://github.com/tmpvar/jsdom>
+* <https://github.com/cheeriojs/cheerio>
+* <https://github.com/johnotander/is-present>
+* <https://github.com/sindresorhus/html-tags>
 
 ## Contributing
 
