@@ -11,7 +11,7 @@ npm install --save dom-stats
 ## Usage
 
 ```javascript
-var domStats = require('dom-stats');
+var domStats = require('dom-stats')
 
 domStats('google.com', function(err, stats) {
   console.log(stats);
@@ -24,7 +24,7 @@ domStats('google.com', function(err, stats) {
   //   duplicateIdsCount: 0,
   //   tagCounts: { a: 12, div: 36, p: 4 }
   // }
-});
+})
 ```
 
 ## License

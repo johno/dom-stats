@@ -1,31 +1,19 @@
 'use strict'
 
-var got = require('got')
-var isUrl = require('is-url')
 var cheerio = require('cheerio')
 var htmlTags = require('html-tags')
 var isPresent = require('is-present')
-var normalizeUrl = require('normalize-url')
 
-module.exports = function domStats (urlOrHtml, options, callback) {
-  if (typeof urlOrHtml !== 'string') {
+module.exports = function domStats (html, options, callback) {
+  if (typeof html !== 'string') {
     throw new TypeError('dom-stats expected a string')
   }
 
   options = options || {}
   callback = callback || function () {}
 
-  if (isUrl(urlOrHtml)) {
-    got(urlOrHtml, function (error, body, response) {
-      if (isPresent(body)) {
-        var stats = analyzeDom(cheerio.load(body), options)
-        callback(null, stats)
-      }
-    })
-  } else {
-    var stats = analyzeDom(cheerio.load(urlOrHtml), options)
-    callback(null, stats)
-  }
+  var stats = analyzeDom(cheerio.load(html), options)
+  callback(null, stats)
 }
 
 function analyzeDom(dom, options) {
@@ -45,7 +33,7 @@ function analyzeDom(dom, options) {
   var classes = {}
 
   htmlTags.forEach(function(tag) {
-    var tags = window.document.getElementsByTagName(tag)
+    var tags = dom(tag)
     var tagCount = tags.length
 
     if (options.ignoreZeroCounts && tagCount == 0) {
@@ -55,24 +43,22 @@ function analyzeDom(dom, options) {
     stats.totalTags += tagCount
     stats.tagCounts[tag] = tagCount
 
-    [].slice.call(tags).forEach(function(tag) {
-      // Get class statistics
-      var classList = (tag.getAttribute('class') || '').split(/\s+/)
+    tags.each(function(i, tag) {
+      var classList = (tag.attribs.class || '').split(/\s+/)
       if (isPresent(classList)) {
         stats.totalClasses += classList.length
       }
 
-      if (isPresent(tag.id)) {
-        if (ids[tag.id]) {
-          ids[tag.id]++
+      if (isPresent(tag.attribs.id)) {
+        if (ids[tag.attribs.id]) {
+          ids[tag.attribs.id]++
         } else {
-          ids[tag.id] = 1
+          ids[tag.attribs.id] = 1
         }
       }
     })
   })
 
-  // Create additional id statistics
   Object.keys(ids).forEach(function(id) {
     stats.totalIds += ids[id]
     if (ids[id] > 1) {

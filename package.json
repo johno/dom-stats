@@ -1,19 +1,19 @@
 {
   "name": "dom-stats",
-  "description": "Parse and return statistics for an HTML page.",
+  "description": "Parse and return statistics for HTML.",
   "author": "John Otander",
   "version": "0.1.1",
   "main": "index.js",
+  "files": [
+    "index.js"
+  ],
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "mocha test"
+    "test": "ava"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/johnotander/dom-stats.git"
-  },
+  "repository": "johnotander/dom-stats",
   "keywords": [
     "dom",
     "stats",
@@ -21,20 +21,12 @@
     "html"
   ],
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/johnotander/dom-stats/issues"
-  },
-  "homepage": "https://github.com/johnotander/dom-stats",
   "dependencies": {
     "cheerio": "^0.19.0",
-    "got": "^4.2.0",
-    "html-tags": "^1.1.0",
-    "is-present": "0.0.1",
-    "is-url": "^1.2.0",
-    "normalize-url": "^1.0.2"
+    "html-tags": "^1.1.1",
+    "is-present": "1.0.0"
   },
   "devDependencies": {
-    "is-present": "0.0.1",
-    "mocha": "*"
+    "ava": "*"
   }
 }
