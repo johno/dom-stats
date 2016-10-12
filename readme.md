@@ -1,30 +1,29 @@
-# dom-stats [![Build Status](https://secure.travis-ci.org/johnotander/dom-stats.png?branch=master)](https://travis-ci.org/johnotander/dom-stats) [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
+# dom-stats [![Build Status](https://secure.travis-ci.org/johnotander/dom-stats.svg?branch=master)](https://travis-ci.org/johnotander/dom-stats) [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
 
-Parse and return stats for a given HTML string.
+Parse and return stats for a given html string.
 
 ## Installation
 
 ```bash
-npm install --save dom-stats
+npm i -S dom-stats
 ```
 
 ## Usage
 
 ```javascript
-var domStats = require('dom-stats')
+const domStats = require('dom-stats')
 
-domStats('<span id="foo"><i class="hi" id="foo"</i></span>', function(err, stats) {
-  console.log(stats);
-  // {
-  //   totalTags: 2,
-  //   totalClasses: 1,
-  //   totalIds: 2,
-  //   averageClassCount: 0.5,
-  //   duplicateIds: ['foo'],
-  //   duplicateIdsCount: 1,
-  //   tagCounts: { span: 1, a: 1 }
-  // }
-})
+const stats = domStats('<span id="foo"><i class="hi" id="foo"</i></span>')
+console.log(stats)
+// {
+//   totalTags: 2,
+//   totalClasses: 1,
+//   totalIds: 2,
+//   averageClassCount: 0.5,
+//   duplicateIds: ['foo'],
+//   duplicateIdsCount: 1,
+//   tagCounts: { span: 1, a: 1 }
+// }
 ```
 
 ## License

@@ -1,6 +1,6 @@
 {
   "name": "dom-stats",
-  "description": "Parse and return statistics for HTML.",
+  "description": "Parse and return statistics for an html string",
   "author": "John Otander",
   "version": "1.0.0",
   "main": "index.js",
@@ -11,7 +11,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "ava"
+    "test": "ava -v"
   },
   "repository": "johnotander/dom-stats",
   "keywords": [

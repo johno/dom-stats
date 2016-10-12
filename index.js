@@ -4,21 +4,15 @@ var cheerio = require('cheerio')
 var htmlTags = require('html-tags')
 var isPresent = require('is-present')
 
-module.exports = function domStats (html, options, callback) {
+module.exports = function domStats (html, options) {
   if (typeof html !== 'string') {
     throw new TypeError('dom-stats expected a string')
   }
 
-  options = options || {}
-  callback = callback || function () {}
-
-  var stats = analyzeDom(cheerio.load(html), options)
-  callback(null, stats)
+  return analyzeDom(cheerio.load(html), options || {})
 }
 
 function analyzeDom(dom, options) {
-  options = options || {}
-
   var stats = {
     totalTags: 0,
     totalClasses: 0,
